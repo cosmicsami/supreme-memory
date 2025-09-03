@@ -1,0 +1,7 @@
+import pygame,pyautogui,time
+from pygame.locals import *
+pygame.font.init()
+pygame.mixer.init()
+WIDTH,HEIGHT=pyautogui.size()
+space=pygame.display.set_mode((WIDTH,HEIGHT))
+  
