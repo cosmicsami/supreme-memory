@@ -1,0 +1,44 @@
+import pygame,pyautogui,random
+
+pygame.init()
+WIDTH,HEIGHT=pyautogui.size()
+maze=pygame.display.set_mode((WIDTH,HEIGHT))
+score=0
+bg=pygame.transform.scale(pygame.image.load("luca_bac.webp"),(WIDTH,HEIGHT))
+pac=pygame.transform.scale(pygame.image.load("luca.png"),(170,150))
+harpoon=pygame.transform.scale(pygame.image.load("harpoon.png"),(170,150))
+
+pacx=WIDTH/2 
+pacy=HEIGHT/2
+
+hx=random.randint(0,WIDTH)
+hy=0
+while pacy<HEIGHT:
+    maze.blit(bg,(0,0))
+    maze.blit(pac,(pacx,pacy))
+    if hy<HEIGHT:
+       # print ("harpoon")
+        maze.blit(harpoon,(hx,hy))
+        hy+=1
+    if hy>=HEIGHT:
+        score+=1
+        hy=0
+
+        hx=random.randint(0,WIDTH)
+        print(score,hy)
+    if (pacx-hx<800 and hx-pacx<80 )and (pacy-hy<80 and hy-pacy<80 )  :
+        print("yes!!!!!!!!!!!!!")    
+        pygame.quit()
+    pygame.display.flip()
+    for i in pygame.event.get():
+            if i.type==pygame.QUIT:
+                pygame.quit()
+            if i.type==pygame.KEYDOWN:
+                if i.key==pygame.K_LEFT:
+                    pacx-=20
+                if i.key==pygame.K_RIGHT:
+                    pacx+=20
+                if i.key==pygame.K_UP:
+                    pacy-=20
+                if i.key==pygame.K_DOWN:
+                    pacy+=20
